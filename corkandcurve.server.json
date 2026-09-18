@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.corkandcurve/wine-travel",
   "title": "Cork & Curve wine travel",
-  "description": "Verified wineries and wine bars in 31 regions with provenance, wine festivals, tours and stays.",
+  "description": "Verified wineries and wine bars in 37 regions with provenance, wine festivals, tours and stays.",
   "websiteUrl": "https://corkandcurve.com",
   "version": "1.0.1",
   "remotes": [
