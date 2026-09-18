@@ -59,3 +59,8 @@ The data and the compute are free. In return: pass booking links to users unchan
 ## This repository
 
 Documentation and the registry manifests only. The servers run on the sites; there is no code to install here.
+
+- [`llms-install.md`](llms-install.md): step-by-step install for AI agents (JSON config, Claude Code commands, `mcp-remote` bridge for stdio-only clients).
+- [`tablejourney.openapi.json`](tablejourney.openapi.json) and [`corkandcurve.openapi.json`](corkandcurve.openapi.json): the REST OpenAPI documents.
+- [`tablejourney.server.json`](tablejourney.server.json) and [`corkandcurve.server.json`](corkandcurve.server.json): the MCP registry manifests.
+- [`logo.png`](logo.png): 400 x 400 logo for directory listings.
