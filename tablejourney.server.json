@@ -1,0 +1,22 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.tablejourney/food-travel",
+  "title": "TableJourney food travel",
+  "description": "Verified food venues in 206 cities with provenance, festivals with dates, bookable tours and stays.",
+  "websiteUrl": "https://tablejourney.com",
+  "version": "1.0.1",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://tablejourney.com/mcp",
+      "headers": [
+        {
+          "name": "X-API-Key",
+          "description": "Optional: your own attribution tag and rate limit",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
