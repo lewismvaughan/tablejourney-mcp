@@ -1,0 +1,23 @@
+identity:
+  name: cities
+  author: lewismvaughan
+  label:
+    en_US: List cities
+    zh_Hans: 列出城市
+description:
+  human:
+    en_US: List every city TableJourney covers, optionally filtered to one country. Use this to find a city's exact slug before calling other tools.
+    zh_Hans: 列出 TableJourney 覆盖的所有城市，可按国家筛选。可用于在调用其他工具前查找城市的准确 slug。
+  llm: List TableJourney's cities, each with its country, display name and page URL. Optionally filter to one country. Use this first when you know a country or city name but not TableJourney's exact slug for it.
+extra:
+  python:
+    source: tools/cities.py
+parameters:
+  - name: country
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Country
+      zh_Hans: 国家
+    llm_description: Restrict the list to one country, using its slug or name, for example "japan" or "Japan".

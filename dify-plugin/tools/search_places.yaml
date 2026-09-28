@@ -1,0 +1,130 @@
+identity:
+  name: search_places
+  author: lewismvaughan
+  label:
+    en_US: Search verified places
+    zh_Hans: 搜索经核实的美食场所
+description:
+  human:
+    en_US: Search verified restaurants, cafes, bakeries, markets and street food across TableJourney's cities. Filter by city, country, kind, cuisine, dietary need, price tier, distance from a point or whether it's open right now.
+    zh_Hans: 在 TableJourney 收录的城市中搜索经核实的餐厅、咖啡馆、面包店、市场和街头小吃，可按城市、国家、类别、菜系、饮食需求、价位、与某坐标的距离或当前是否营业进行筛选。
+  llm: Search TableJourney's verified food places. Every result carries an address, price tier, editorial score, coordinates, a short description and provenance (the source URL used to verify it). Use this to find restaurants, cafes, bakeries, markets or street food matching a query, city, cuisine or dietary need.
+extra:
+  python:
+    source: tools/search_places.py
+parameters:
+  - name: q
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Query
+      zh_Hans: 查询词
+    human_description:
+      en_US: Free text, a venue name, dish, cuisine or neighborhood.
+      zh_Hans: 自由文本：场所名称、菜品、菜系或街区。
+    llm_description: Free text search term, such as a venue name, dish, cuisine or neighborhood.
+  - name: country
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Country
+      zh_Hans: 国家
+    llm_description: The country slug or name to search within, for example "japan" or "france".
+  - name: city
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: City
+      zh_Hans: 城市
+    llm_description: The city slug or name to search within, for example "tokyo" or "paris".
+  - name: kind
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Kind
+      zh_Hans: 类别
+    llm_description: The venue category or group, for example "restaurants", "cafes", "bakeries", "markets", "street-food", or a broader group like "eat", "drink", "bake", "do".
+  - name: cuisine
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Cuisine
+      zh_Hans: 菜系
+    llm_description: A cuisine to filter by, for example "ramen", "italian" or "vegan".
+  - name: dietary
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Dietary need
+      zh_Hans: 饮食需求
+    llm_description: A dietary need to filter by, for example vegan, vegetarian, gluten-free, halal or kosher.
+  - name: price_tier
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Price tier
+      zh_Hans: 价位
+    llm_description: TableJourney's price tier symbol, the venue's local currency symbol repeated once to four times, for example EUR EUR or USD USD USD (use the actual currency symbol, not the letters).
+  - name: near
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Near (lat,lng)
+      zh_Hans: 附近坐标（纬度,经度）
+    llm_description: A "latitude,longitude" pair. When set, results are sorted by distance from this point.
+  - name: radius_km
+    form: llm
+    type: number
+    required: false
+    default: 3.0
+    label:
+      en_US: Radius (km)
+      zh_Hans: 半径（公里）
+    llm_description: Search radius in kilometers around the "near" point. Only used when "near" is set.
+  - name: open_only
+    form: llm
+    type: boolean
+    required: false
+    default: true
+    label:
+      en_US: Open only
+      zh_Hans: 仅显示营业中
+    llm_description: When true (the default), only currently open or undetermined venues are returned; closed venues are excluded.
+  - name: open_at
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Open at
+      zh_Hans: 指定营业时间
+    llm_description: Check opening status at a specific time instead of now. Accepts "now", an ISO datetime, or a phrase like "sunday 10:00" (UTC).
+  - name: limit
+    form: llm
+    type: number
+    required: false
+    default: 20
+    min: 1
+    max: 100
+    label:
+      en_US: Limit
+      zh_Hans: 返回数量上限
+    llm_description: Maximum number of places to return, from 1 to 100.
+  - name: offset
+    form: form
+    type: number
+    required: false
+    default: 0
+    label:
+      en_US: Offset
+      zh_Hans: 偏移量
+    human_description:
+      en_US: Number of results to skip, for paging through a large result set.
+      zh_Hans: 跳过的结果数量，用于对较大结果集分页。

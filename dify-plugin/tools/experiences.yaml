@@ -1,0 +1,67 @@
+identity:
+  name: experiences
+  author: lewismvaughan
+  label:
+    en_US: Find bookable experiences
+    zh_Hans: 查找可预订的体验
+description:
+  human:
+    en_US: Find bookable food tours, cooking classes and tickets in a city, optionally filtered by a text query, booking partner or restricted to food-related experiences only.
+    zh_Hans: 查找某城市中可预订的美食之旅、烹饪课程和门票，可按文本查询、合作平台筛选，或仅限美食相关体验。
+  llm: Find bookable tours, classes and tickets on TableJourney, sourced from GetYourGuide, Viator or Musement. Each result includes a title, price, rating and a TableJourney booking link.
+extra:
+  python:
+    source: tools/experiences.py
+parameters:
+  - name: country
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Country
+      zh_Hans: 国家
+    llm_description: The country slug, for example "japan" or "italy".
+  - name: city
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: City
+      zh_Hans: 城市
+    llm_description: The city slug, for example "tokyo" or "rome".
+  - name: q
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Query
+      zh_Hans: 查询词
+    llm_description: Free text to match against the experience title, such as "cooking class" or "food tour".
+  - name: partner
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Partner
+      zh_Hans: 合作平台
+    llm_description: Restrict results to one booking partner, either "gyg" (GetYourGuide), "viator" or "musement".
+  - name: food_only
+    form: llm
+    type: boolean
+    required: false
+    default: false
+    label:
+      en_US: Food only
+      zh_Hans: 仅限美食类
+    llm_description: When true, only food and drink related experiences are returned.
+  - name: limit
+    form: llm
+    type: number
+    required: false
+    default: 20
+    min: 1
+    max: 100
+    label:
+      en_US: Limit
+      zh_Hans: 返回数量上限
+    llm_description: Maximum number of experiences to return, from 1 to 100.

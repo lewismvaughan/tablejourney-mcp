@@ -1,0 +1,66 @@
+identity:
+  name: festivals
+  author: lewismvaughan
+  label:
+    en_US: Find food festivals
+    zh_Hans: 查找美食节
+description:
+  human:
+    en_US: Find food festivals with resolved dates, optionally filtered by country, city, a date range or a text query.
+    zh_Hans: 查找带有明确日期的美食节，可按国家、城市、日期范围或文本查询进行筛选。
+  llm: Find food festivals on TableJourney with their resolved start and end dates. Use this for "what food festivals are on in <city>" or "food festivals in <month>" style questions.
+extra:
+  python:
+    source: tools/festivals.py
+parameters:
+  - name: country
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Country
+      zh_Hans: 国家
+    llm_description: The country slug, for example "japan" or "italy".
+  - name: city
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: City
+      zh_Hans: 城市
+    llm_description: The city slug, for example "kyoto" or "rome".
+  - name: q
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Query
+      zh_Hans: 查询词
+    llm_description: Free text to match against the festival name or description.
+  - name: from
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: From date
+      zh_Hans: 起始日期
+    llm_description: Only return festivals on or after this ISO date (YYYY-MM-DD).
+  - name: to
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: To date
+      zh_Hans: 结束日期
+    llm_description: Only return festivals on or before this ISO date (YYYY-MM-DD).
+  - name: limit
+    form: llm
+    type: number
+    required: false
+    default: 20
+    min: 1
+    max: 100
+    label:
+      en_US: Limit
+      zh_Hans: 返回数量上限
+    llm_description: Maximum number of festivals to return, from 1 to 100.

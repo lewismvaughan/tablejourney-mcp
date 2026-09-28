@@ -1,0 +1,63 @@
+identity:
+  name: plan_day
+  author: lewismvaughan
+  label:
+    en_US: Plan a food day
+    zh_Hans: 规划美食一日行程
+description:
+  human:
+    en_US: Compose a one-day food itinerary for a city from TableJourney's verified places, slotted by time of day (breakfast, morning, lunch and so on), optionally filtered by neighborhood, dietary need, price tier or date.
+    zh_Hans: 根据 TableJourney 已核实的场所数据，为某个城市生成按时段划分（早餐、上午、午餐等）的一日美食行程，可按街区、饮食需求、价位或日期筛选。
+  llm: Compose a one-day food itinerary for a city. Returns a list of time slots, each with a verified place (name, address, hours, description, page URL). Requires a country and a city; both are TableJourney's URL slugs, for example country "japan" and city "tokyo".
+extra:
+  python:
+    source: tools/plan_day.py
+parameters:
+  - name: country
+    form: llm
+    type: string
+    required: true
+    label:
+      en_US: Country
+      zh_Hans: 国家
+    llm_description: The country slug, for example "japan" or "france". Use the slug shown on TableJourney pages, not a display name with spaces.
+  - name: city
+    form: llm
+    type: string
+    required: true
+    label:
+      en_US: City
+      zh_Hans: 城市
+    llm_description: The city slug, for example "tokyo" or "paris". Use the cities tool first if you are not sure of the exact slug.
+  - name: neighborhood
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Neighborhood
+      zh_Hans: 街区
+    llm_description: Restrict the plan to one neighborhood within the city.
+  - name: dietary
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Dietary need
+      zh_Hans: 饮食需求
+    llm_description: A dietary need to filter by, for example vegan, vegetarian, gluten-free, halal or kosher.
+  - name: price_tier
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Price tier
+      zh_Hans: 价位
+    llm_description: TableJourney's price tier symbol, the local currency symbol repeated once to four times.
+  - name: date
+    form: llm
+    type: string
+    required: false
+    label:
+      en_US: Date
+      zh_Hans: 日期
+    llm_description: An ISO date (YYYY-MM-DD) to plan the day for, used to prefer places that are open that day.
