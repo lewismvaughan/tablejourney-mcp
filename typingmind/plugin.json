@@ -1,0 +1,40 @@
+{
+  "uuid": "03bf79b9-662c-4591-a3fd-f47024ddd632",
+  "id": "search_food_places",
+  "emoji": "",
+  "userSettings": null,
+  "title": "TableJourney Food Search",
+  "iconURL": "https://tablejourney.com/icon-192.png",
+  "openaiSpec": {
+    "name": "search_food_places",
+    "description": "Search verified restaurants, cafes, markets and street food across 214 cities. Every result has a source URL and a last-checked date. Use this when the user asks where to eat in a city.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Free text: a dish, cuisine or neighborhood (optional)"
+        },
+        "city": {
+          "type": "string",
+          "description": "City name, for example Lisbon"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country name, for example Portugal (optional)"
+        },
+        "cuisine": {
+          "type": "string",
+          "description": "Cuisine, for example ramen or tapas (optional)"
+        },
+        "dietary": {
+          "type": "string",
+          "description": "vegan, vegetarian, halal, kosher or gluten-free (optional)"
+        }
+      },
+      "required": []
+    }
+  },
+  "implementationType": "javascript",
+  "outputType": "respond_to_ai"
+}
