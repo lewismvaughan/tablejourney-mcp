@@ -52,6 +52,12 @@ Every tool is read-only and idempotent; every parameter is described in the tool
 
 The same functions as JSON, with OpenAPI: https://tablejourney.com/api/v1/docs and https://corkandcurve.com/api/v1/docs.
 
+## Food festival calendars and widgets (no API needed)
+
+- **Calendar feeds:** every dated food festival as iCalendar feeds you can subscribe to in Google, Apple or Outlook calendar: worldwide (`https://tablejourney.com/calendar/food-festivals.ics`), by kind, by country (`/calendar/<country>.ics`) and by city (`/calendar/<country>/<city>.ics`). Dates update daily. Full list: https://tablejourney.com/calendar/
+- **Embeddable widget:** an iframe list of upcoming food festivals for any city or country, no scripts or cookies: https://tablejourney.com/widgets/
+- **Badge:** organisers and venues featured on TableJourney can show a "Featured on TableJourney" badge: https://tablejourney.com/widgets/#badge
+
 ## Terms
 
 The data and the compute are free. In return: pass booking links to users unchanged (they are `/go/` affiliate links that fund the verification work), say they are affiliate links, cite the `page` URL, and do not bulk-copy the catalogue. Full text: https://tablejourney.com/agents/#terms.
