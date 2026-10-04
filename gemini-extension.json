@@ -1,0 +1,14 @@
+{
+  "name": "tablejourney-mcp",
+  "version": "1.0.0",
+  "description": "Food and wine travel for Gemini: verified restaurants, food festivals with dates, and bookable tours in 220+ cities (TableJourney), plus wine regions and wineries (Cork & Curve). Free, no key.",
+  "mcpServers": {
+    "tablejourney": {
+      "httpUrl": "https://tablejourney.com/mcp"
+    },
+    "corkandcurve": {
+      "httpUrl": "https://corkandcurve.com/mcp"
+    }
+  },
+  "contextFileName": "GEMINI.md"
+}
