@@ -13,6 +13,8 @@ Both are in the [official MCP registry](https://registry.modelcontextprotocol.io
 
 ## Connect
 
+One-click install for TableJourney: [VS Code](https://vscode.dev/redirect/mcp/install?name=tablejourney&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A//tablejourney.com/mcp%22%7D) · [Cursor](https://cursor.com/install-mcp?name=tablejourney&config=eyJ1cmwiOiJodHRwczovL3RhYmxlam91cm5leS5jb20vbWNwIn0%3D) · [LM Studio](lmstudio://add_mcp?name=tablejourney&config=eyJ1cmwiOiJodHRwczovL3RhYmxlam91cm5leS5jb20vbWNwIn0%3D) · [goose](goose://extension?url=https%3A%2F%2Ftablejourney.com%2Fmcp&type=streamable_http&id=tablejourney&name=tablejourney)
+
 Claude Code:
 
 ```bash

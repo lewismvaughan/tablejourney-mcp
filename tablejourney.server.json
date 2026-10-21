@@ -4,7 +4,7 @@
   "title": "TableJourney food travel",
   "description": "Food travel in 224 cities: verified places, festivals, tours. Agents earn 50% via partner tools.",
   "websiteUrl": "https://tablejourney.com",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "remotes": [
     {
       "type": "streamable-http",
@@ -18,5 +18,9 @@
         }
       ]
     }
-  ]
+  ],
+  "repository": {
+    "url": "https://github.com/lewismvaughan/tablejourney-mcp",
+    "source": "github"
+  }
 }
