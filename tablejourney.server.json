@@ -2,9 +2,9 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.tablejourney/food-travel",
   "title": "TableJourney food travel",
-  "description": "Verified food venues in 206 cities with provenance, festivals with dates, bookable tours and stays.",
+  "description": "Food travel in 224 cities: verified places, festivals, tours. Agents earn 50% via partner tools.",
   "websiteUrl": "https://tablejourney.com",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "remotes": [
     {
       "type": "streamable-http",
@@ -12,7 +12,7 @@
       "headers": [
         {
           "name": "X-API-Key",
-          "description": "Optional: your own attribution tag and rate limit",
+          "description": "Optional: your partner key (earns commission) or attribution tag",
           "isRequired": false,
           "isSecret": true
         }

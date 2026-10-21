@@ -1,1 +1,2225 @@
-{"openapi":"3.1.0","info":{"title":"TableJourney agent API","description":"Food travel data for AI agents: editorially verified places with provenance, festivals with resolved dates, bookable experiences, stays and car hire. Every booking link is a https://tablejourney.com/go/ link that carries your key's attribution. Public: no key needed. An optional X-API-Key gives your agent its own attribution tag and rate limit (support@tablejourney.com). Also available as an MCP server at /mcp. Free to use; in return, pass booking links to users unchanged (they are affiliate links that fund the verification) and cite the page URL.","version":"1.0"},"paths":{"/api/v1/health":{"get":{"tags":["meta"],"summary":"Health","operationId":"health_api_v1_health_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"additionalProperties":true,"type":"object","title":"Response Health Api V1 Health Get"}}}}}}},"/api/v1/cities":{"get":{"tags":["places"],"summary":"Cities","operationId":"cities_api_v1_cities_get","parameters":[{"name":"country","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Country"}},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","additionalProperties":true},"title":"Response Cities Api V1 Cities Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/v1/places":{"get":{"tags":["places"],"summary":"Search verified venues","operationId":"places_api_v1_places_get","parameters":[{"name":"q","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Q"}},{"name":"country","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Country"}},{"name":"city","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"City"}},{"name":"kind","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"restaurants, cafes, bakeries, markets, street-food... or a group: eat, drink, bake, do","title":"Kind"},"description":"restaurants, cafes, bakeries, markets, street-food... or a group: eat, drink, bake, do"},{"name":"cuisine","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Cuisine"}},{"name":"near","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"'lat,lng'; results sorted by distance","title":"Near"},"description":"'lat,lng'; results sorted by distance"},{"name":"radius_km","in":"query","required":false,"schema":{"type":"number","default":3.0,"title":"Radius Km"}},{"name":"open_only","in":"query","required":false,"schema":{"type":"boolean","default":true,"title":"Open Only"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":100,"default":20,"title":"Limit"}},{"name":"offset","in":"query","required":false,"schema":{"type":"integer","default":0,"title":"Offset"}},{"name":"dietary","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"vegan, vegetarian, gluten-free, halal, kosher...","title":"Dietary"},"description":"vegan, vegetarian, gluten-free, halal, kosher..."},{"name":"price_tier","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"the site's tier symbols, e.g. €€ or $$$","title":"Price Tier"},"description":"the site's tier symbols, e.g. €€ or $$$"},{"name":"open_at","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"'now', an ISO datetime, or 'sunday 10:00' (UTC)","title":"Open At"},"description":"'now', an ISO datetime, or 'sunday 10:00' (UTC)"},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/v1/plan/{country}/{city}":{"get":{"tags":["places"],"summary":"Compose a food day from filters","operationId":"plan_api_v1_plan__country___city__get","parameters":[{"name":"country","in":"path","required":true,"schema":{"type":"string","title":"Country"}},{"name":"city","in":"path","required":true,"schema":{"type":"string","title":"City"}},{"name":"neighborhood","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Neighborhood"}},{"name":"dietary","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Dietary"}},{"name":"price_tier","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Price Tier"}},{"name":"date","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Date"}},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":true,"title":"Response Plan Api V1 Plan  Country   City  Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/v1/places/{country}/{city}/{kind}/{slug}":{"get":{"tags":["places"],"summary":"Place","operationId":"place_api_v1_places__country___city___kind___slug__get","parameters":[{"name":"country","in":"path","required":true,"schema":{"type":"string","title":"Country"}},{"name":"city","in":"path","required":true,"schema":{"type":"string","title":"City"}},{"name":"kind","in":"path","required":true,"schema":{"type":"string","title":"Kind"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","title":"Slug"}},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":true,"title":"Response Place Api V1 Places  Country   City   Kind   Slug  Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/v1/festivals":{"get":{"tags":["festivals"],"summary":"Food festivals, with resolved dates","operationId":"festivals_api_v1_festivals_get","parameters":[{"name":"country","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Country"}},{"name":"city","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"City"}},{"name":"from","in":"query","required":false,"schema":{"anyOf":[{"type":"string","format":"date"},{"type":"null"}],"title":"From"}},{"name":"to","in":"query","required":false,"schema":{"anyOf":[{"type":"string","format":"date"},{"type":"null"}],"title":"To"}},{"name":"q","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Q"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":100,"default":20,"title":"Limit"}},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","additionalProperties":true},"title":"Response Festivals Api V1 Festivals Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/v1/experiences":{"get":{"tags":["bookable"],"summary":"Bookable tours, classes and tickets","operationId":"experiences_api_v1_experiences_get","parameters":[{"name":"country","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Country"}},{"name":"city","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"City"}},{"name":"q","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Q"}},{"name":"partner","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"gyg, viator or musement","title":"Partner"},"description":"gyg, viator or musement"},{"name":"food_only","in":"query","required":false,"schema":{"type":"boolean","default":false,"title":"Food Only"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":100,"default":20,"title":"Limit"}},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","additionalProperties":true},"title":"Response Experiences Api V1 Experiences Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/v1/stays/{country}/{city}":{"get":{"tags":["bookable"],"summary":"Where to stay: hotels and stay partners","operationId":"stays_api_v1_stays__country___city__get","parameters":[{"name":"country","in":"path","required":true,"schema":{"type":"string","title":"Country"}},{"name":"city","in":"path","required":true,"schema":{"type":"string","title":"City"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":50,"default":10,"title":"Limit"}},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":true,"title":"Response Stays Api V1 Stays  Country   City  Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/v1/cars/{country}/{city}":{"get":{"tags":["bookable"],"summary":"Car hire partners covering the city","operationId":"cars_api_v1_cars__country___city__get","parameters":[{"name":"country","in":"path","required":true,"schema":{"type":"string","title":"Country"}},{"name":"city","in":"path","required":true,"schema":{"type":"string","title":"City"}},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","additionalProperties":true},"title":"Response Cars Api V1 Cars  Country   City  Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/v1/dishes":{"get":{"tags":["places"],"summary":"Signature dishes of a city and where to eat them","operationId":"dishes_api_v1_dishes_get","parameters":[{"name":"country","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Country"}},{"name":"city","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"City"}},{"name":"q","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Q"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":100,"default":20,"title":"Limit"}},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","additionalProperties":true},"title":"Response Dishes Api V1 Dishes Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/v1/itineraries/{country}/{city}":{"get":{"tags":["places"],"summary":"Itineraries","operationId":"itineraries_api_v1_itineraries__country___city__get","parameters":[{"name":"country","in":"path","required":true,"schema":{"type":"string","title":"Country"}},{"name":"city","in":"path","required":true,"schema":{"type":"string","title":"City"}},{"name":"api_key","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Api Key"}},{"name":"x-api-key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Api-Key"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","additionalProperties":true},"title":"Response Itineraries Api V1 Itineraries  Country   City  Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/api/expand/search":{"get":{"tags":["site"],"summary":"The site's own search (public, no key)","operationId":"expand_search_api_expand_search_get","parameters":[{"name":"q","in":"query","required":false,"schema":{"type":"string","default":"","title":"Q"}},{"name":"type","in":"query","required":false,"schema":{"type":"string","default":"all","title":"Type"}},{"name":"city","in":"query","required":false,"schema":{"type":"string","default":"","title":"City"}},{"name":"country","in":"query","required":false,"schema":{"type":"string","default":"","title":"Country"}},{"name":"src","in":"query","required":false,"schema":{"type":"string","default":"","title":"Src"}},{"name":"food","in":"query","required":false,"schema":{"type":"string","default":"","title":"Food"}},{"name":"sort","in":"query","required":false,"schema":{"type":"string","default":"relevance","title":"Sort"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","default":20,"title":"Limit"}},{"name":"offset","in":"query","required":false,"schema":{"type":"integer","default":0,"title":"Offset"}},{"name":"nocity","in":"query","required":false,"schema":{"type":"string","default":"","title":"Nocity"}}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}}},"components":{"schemas":{"HTTPValidationError":{"properties":{"detail":{"items":{"$ref":"#/components/schemas/ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"},"ValidationError":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"}}}}
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "TableJourney agent API",
+        "description": "Food travel data for AI agents: editorially verified places with provenance, festivals with resolved dates, bookable experiences, stays and car hire. Every booking link is a https://tablejourney.com/go/ link that carries your key's attribution. Public: no key needed. An optional X-API-Key gives your agent its own attribution tag and rate limit (support@tablejourney.com). Also available as an MCP server at /mcp. Free to use; in return, pass booking links to users unchanged (they are affiliate links that fund the verification) and cite the page URL.",
+        "contact": {
+            "name": "TableJourney",
+            "url": "https://tablejourney.com/agents/",
+            "email": "support@tablejourney.com"
+        },
+        "license": {
+            "name": "TableJourney agent terms",
+            "url": "https://tablejourney.com/agents/#terms"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://tablejourney.com",
+            "description": "TableJourney"
+        }
+    ],
+    "paths": {
+        "/api/v1/health": {
+            "get": {
+                "tags": [
+                    "meta"
+                ],
+                "summary": "Health",
+                "description": "The readiness probe's endpoint, hit every 10 s by each pod:\nSELECT 1 proves the database answers, and the entity count is cached\nfor 10 minutes (it was a count(*) on every probe until 2026-09-30).",
+                "operationId": "health_api_v1_health_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": true,
+                                    "type": "object",
+                                    "title": "Response Health Api V1 Health Get"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cities": {
+            "get": {
+                "tags": [
+                    "places"
+                ],
+                "summary": "Cities",
+                "operationId": "cities_api_v1_cities_get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true
+                                    },
+                                    "title": "Response Cities Api V1 Cities Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/places": {
+            "get": {
+                "tags": [
+                    "places"
+                ],
+                "summary": "Search verified venues",
+                "operationId": "places_api_v1_places_get",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Q"
+                        }
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "kind",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "restaurants, cafes, bakeries, markets, street-food... or a group: eat, drink, bake, do",
+                            "title": "Kind"
+                        },
+                        "description": "restaurants, cafes, bakeries, markets, street-food... or a group: eat, drink, bake, do"
+                    },
+                    {
+                        "name": "cuisine",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Cuisine"
+                        }
+                    },
+                    {
+                        "name": "near",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "'lat,lng'; results sorted by distance",
+                            "title": "Near"
+                        },
+                        "description": "'lat,lng'; results sorted by distance"
+                    },
+                    {
+                        "name": "radius_km",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "number",
+                            "default": 3.0,
+                            "title": "Radius Km"
+                        }
+                    },
+                    {
+                        "name": "open_only",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": true,
+                            "title": "Open Only"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "minimum": 1,
+                            "default": 20,
+                            "title": "Limit"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    },
+                    {
+                        "name": "dietary",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "vegan, vegetarian, gluten-free, halal, kosher...",
+                            "title": "Dietary"
+                        },
+                        "description": "vegan, vegetarian, gluten-free, halal, kosher..."
+                    },
+                    {
+                        "name": "price_tier",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "the site's tier symbols, e.g. \u20ac\u20ac or $$$",
+                            "title": "Price Tier"
+                        },
+                        "description": "the site's tier symbols, e.g. \u20ac\u20ac or $$$"
+                    },
+                    {
+                        "name": "open_at",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "'now', an ISO datetime, or 'sunday 10:00' (UTC)",
+                            "title": "Open At"
+                        },
+                        "description": "'now', an ISO datetime, or 'sunday 10:00' (UTC)"
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/plan/{country}/{city}": {
+            "get": {
+                "tags": [
+                    "places"
+                ],
+                "summary": "Compose a food day from filters",
+                "operationId": "plan_api_v1_plan__country___city__get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "neighborhood",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Neighborhood"
+                        }
+                    },
+                    {
+                        "name": "dietary",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Dietary"
+                        }
+                    },
+                    {
+                        "name": "price_tier",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Price Tier"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Date"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": true,
+                                    "title": "Response Plan Api V1 Plan  Country   City  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/places/{country}/{city}/{kind}/{slug}": {
+            "get": {
+                "tags": [
+                    "places"
+                ],
+                "summary": "Place",
+                "operationId": "place_api_v1_places__country___city___kind___slug__get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "kind",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Kind"
+                        }
+                    },
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Slug"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": true,
+                                    "title": "Response Place Api V1 Places  Country   City   Kind   Slug  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/festivals": {
+            "get": {
+                "tags": [
+                    "festivals"
+                ],
+                "summary": "Food festivals, with resolved dates",
+                "operationId": "festivals_api_v1_festivals_get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "To"
+                        }
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Q"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "minimum": 1,
+                            "default": 20,
+                            "title": "Limit"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true
+                                    },
+                                    "title": "Response Festivals Api V1 Festivals Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/experiences": {
+            "get": {
+                "tags": [
+                    "bookable"
+                ],
+                "summary": "Bookable tours, classes and tickets",
+                "operationId": "experiences_api_v1_experiences_get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Q"
+                        }
+                    },
+                    {
+                        "name": "partner",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "description": "gyg, viator or musement",
+                            "title": "Partner"
+                        },
+                        "description": "gyg, viator or musement"
+                    },
+                    {
+                        "name": "food_only",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Food Only"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "minimum": 1,
+                            "default": 20,
+                            "title": "Limit"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true
+                                    },
+                                    "title": "Response Experiences Api V1 Experiences Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/stays/{country}/{city}": {
+            "get": {
+                "tags": [
+                    "bookable"
+                ],
+                "summary": "Where to stay: hotels and stay partners",
+                "operationId": "stays_api_v1_stays__country___city__get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 50,
+                            "minimum": 1,
+                            "default": 10,
+                            "title": "Limit"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": true,
+                                    "title": "Response Stays Api V1 Stays  Country   City  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cars/{country}/{city}": {
+            "get": {
+                "tags": [
+                    "bookable"
+                ],
+                "summary": "Car hire partners covering the city",
+                "operationId": "cars_api_v1_cars__country___city__get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true
+                                    },
+                                    "title": "Response Cars Api V1 Cars  Country   City  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/tickets/{country}/{city}": {
+            "get": {
+                "tags": [
+                    "bookable"
+                ],
+                "summary": "Tickets, passes and tour partners covering the city",
+                "operationId": "tickets_api_v1_tickets__country___city__get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true
+                                    },
+                                    "title": "Response Tickets Api V1 Tickets  Country   City  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/things-to-do/{country}/{city}": {
+            "get": {
+                "tags": [
+                    "bookable"
+                ],
+                "summary": "Everything to do in a city in one call, with booking links",
+                "operationId": "things_to_do_rest_api_v1_things_to_do__country___city__get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "From"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "To"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/dishes": {
+            "get": {
+                "tags": [
+                    "places"
+                ],
+                "summary": "Signature dishes of a city and where to eat them",
+                "operationId": "dishes_api_v1_dishes_get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Q"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "minimum": 1,
+                            "default": 20,
+                            "title": "Limit"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true
+                                    },
+                                    "title": "Response Dishes Api V1 Dishes Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/itineraries/{country}/{city}": {
+            "get": {
+                "tags": [
+                    "places"
+                ],
+                "summary": "Itineraries",
+                "operationId": "itineraries_api_v1_itineraries__country___city__get",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Api Key"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "X-Api-Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true
+                                    },
+                                    "title": "Response Itineraries Api V1 Itineraries  Country   City  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/expand/search": {
+            "get": {
+                "tags": [
+                    "site"
+                ],
+                "summary": "The site's own search (public, no key)",
+                "operationId": "expand_search_api_expand_search_get",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "",
+                            "title": "Q"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "title": "Type"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "",
+                            "title": "City"
+                        }
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "",
+                            "title": "Country"
+                        }
+                    },
+                    {
+                        "name": "src",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "",
+                            "title": "Src"
+                        }
+                    },
+                    {
+                        "name": "food",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "",
+                            "title": "Food"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "relevance",
+                            "title": "Sort"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 20,
+                            "title": "Limit"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    },
+                    {
+                        "name": "nocity",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "",
+                            "title": "Nocity"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/signup": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Signup",
+                "description": "Create a free partner account. Sends a one-time code to the address; confirm it with\n/api/v1/partners/verify. The password is optional for agents (they sign in with emailed codes\nor their API key).",
+                "operationId": "partner_signup_api_v1_partners_signup_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/verify": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Verify",
+                "description": "Confirm the address with the emailed code. Signs the browser in, and returns the account's\nAPI key once (keep it: it is the agent's sign-in and its /go/ attribution).",
+                "operationId": "partner_verify_api_v1_partners_verify_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/login": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Login",
+                "description": "Sign in with email and password (browsers). Locks the account after repeated wrong\npasswords; a reset or a good password after the lock clears it.",
+                "operationId": "partner_login_api_v1_partners_login_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/login-code": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Login Code",
+                "description": "Email a one-time sign-in code (no password needed: agents, or people who prefer it).",
+                "operationId": "partner_login_code_api_v1_partners_login_code_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/login-code/verify": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Login Code Verify",
+                "description": "Sign in with an emailed code. Browsers get a session; send `new_api_key=true` to also get a\nfresh API key (the old one stops working).",
+                "operationId": "partner_login_code_verify_api_v1_partners_login_code_verify_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/logout": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Logout",
+                "operationId": "partner_logout_api_v1_partners_logout_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/password/forgot": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Password Forgot",
+                "description": "Email a password reset code and link. Same answer whether or not the address has an\naccount.",
+                "operationId": "partner_password_forgot_api_v1_partners_password_forgot_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/password/reset": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Password Reset",
+                "description": "Set a new password with the emailed reset code. Clears any lockout and signs every device\nout; the account's email gets a notice.",
+                "operationId": "partner_password_reset_api_v1_partners_password_reset_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/password/change": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Password Change",
+                "description": "Change the password while signed in (the current password is required). Other sessions are\nsigned out.",
+                "operationId": "partner_password_change_api_v1_partners_password_change_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/me": {
+            "get": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Me",
+                "operationId": "partner_me_api_v1_partners_me_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/settings": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Settings Update",
+                "description": "Name, website and the marketing email switch.",
+                "operationId": "partner_settings_update_api_v1_partners_settings_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/api-key": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Api Key",
+                "description": "A new API key (the old one stops working). Shown once.",
+                "operationId": "partner_api_key_api_v1_partners_api_key_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/payout-method": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Payout Method",
+                "description": "Set how you are paid: PayPal, USDC on Base or bank transfer. Takes effect only after you\nconfirm the emailed code (/api/v1/partners/payout-method/confirm), so a stolen session or key\ncannot redirect your earnings without your inbox.",
+                "operationId": "partner_payout_method_api_v1_partners_payout_method_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/payout-method/confirm": {
+            "post": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Payout Confirm",
+                "operationId": "partner_payout_confirm_api_v1_partners_payout_method_confirm_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/link": {
+            "get": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Link",
+                "description": "Any page of the site with the member's ?ref= code, ready to share.",
+                "operationId": "partner_link_api_v1_partners_link_get",
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "https://tablejourney.com/",
+                            "title": "Url"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partners/stats": {
+            "get": {
+                "tags": [
+                    "partners"
+                ],
+                "summary": "Partner Stats",
+                "description": "Visits and partner clicks the member's links brought, by day and partner, and earnings by\nstatus (pending until the partner settles, then payable after the hold).",
+                "operationId": "partner_stats_api_v1_partners_stats_get",
+                "parameters": [
+                    {
+                        "name": "days",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 365,
+                            "minimum": 1,
+                            "default": 30,
+                            "title": "Days"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/register": {
+            "post": {
+                "tags": [
+                    "oauth"
+                ],
+                "summary": "Oauth Register",
+                "description": "Dynamic client registration (RFC 7591): public clients with PKCE, no secret.",
+                "operationId": "oauth_register_api_v1_oauth_register_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/authorize": {
+            "get": {
+                "tags": [
+                    "oauth"
+                ],
+                "summary": "Oauth Authorize",
+                "description": "Sign in (or join) on the site, then allow the agent to act for your partner account.",
+                "operationId": "oauth_authorize_api_v1_oauth_authorize_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/token": {
+            "post": {
+                "tags": [
+                    "oauth"
+                ],
+                "summary": "Oauth Token",
+                "description": "Authorization code with PKCE, or a refresh token (each refresh token works once).",
+                "operationId": "oauth_token_api_v1_oauth_token_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/oauth/revoke": {
+            "post": {
+                "tags": [
+                    "oauth"
+                ],
+                "summary": "Oauth Revoke",
+                "operationId": "oauth_revoke_api_v1_oauth_revoke_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/a2a": {
+            "post": {
+                "tags": [
+                    "a2a"
+                ],
+                "summary": "A2A Rpc",
+                "description": "A2A JSON-RPC: message/send with a text part; the reply is one agent message.",
+                "operationId": "a2a_rpc_api_v1_a2a_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    },
+                    "input": {
+                        "title": "Input"
+                    },
+                    "ctx": {
+                        "type": "object",
+                        "title": "Context"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}
