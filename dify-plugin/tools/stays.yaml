@@ -1,0 +1,51 @@
+identity:
+  name: stays
+  author: lewismvaughan
+  label:
+    en_US: Where to stay
+    zh_Hans: 住宿
+description:
+  human:
+    en_US: Hotels and stay partners for a city, with booking links.
+    zh_Hans: 某城市的酒店和住宿合作平台，附预订链接。
+  llm: 'Hotels and places to stay in a city. Returns named hotels (partner, photo, nearby landmarks) and stay partners with a from price where known. Booking links are https://tablejourney.com/go/ affiliate links; give them to the user as returned and say once that they are affiliate links.'
+extra:
+  python:
+    source: tools/stays.py
+parameters:
+- name: country
+  form: llm
+  type: string
+  required: true
+  label:
+    en_US: Country
+    zh_Hans: 国家
+  human_description:
+    en_US: The country slug or name, for example "italy" or "Italy".
+    zh_Hans: 国家的 slug 或名称，例如 italy。
+  llm_description: The country slug or name, for example "italy" or "Italy".
+- name: city
+  form: llm
+  type: string
+  required: true
+  label:
+    en_US: City
+    zh_Hans: 城市
+  human_description:
+    en_US: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.
+    zh_Hans: 城市的 slug 或名称，例如 rome 或 new-york-city。可用 cities 工具查看所有城市。
+  llm_description: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.
+- name: limit
+  form: llm
+  type: number
+  required: false
+  default: 10
+  min: 1
+  max: 50
+  label:
+    en_US: Limit
+    zh_Hans: 返回数量上限
+  human_description:
+    en_US: Maximum number of hotels to return, from 1 to 50.
+    zh_Hans: 返回酒店数量上限，1 到 50。
+  llm_description: Maximum number of hotels to return, from 1 to 50.

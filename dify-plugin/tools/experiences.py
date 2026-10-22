@@ -10,9 +10,7 @@ from ._client import get_json
 
 
 class ExperiencesTool(Tool):
-    def _invoke(
-        self, tool_parameters: dict[str, Any]
-    ) -> Generator[ToolInvokeMessage, None, None]:
+    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         params = {
             "country": tool_parameters.get("country"),
             "city": tool_parameters.get("city"),
@@ -29,9 +27,7 @@ class ExperiencesTool(Tool):
                 api_key=self.runtime.credentials.get("api_key"),
             )
         except Exception as exc:
-            yield self.create_text_message(
-                f"TableJourney experience search failed: {exc}"
-            )
+            yield self.create_text_message(f"TableJourney experience search failed: {exc}")
             return
 
         yield self.create_json_message({"results": results, "count": len(results)})

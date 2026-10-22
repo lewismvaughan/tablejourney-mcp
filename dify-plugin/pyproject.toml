@@ -1,6 +1,6 @@
 [project]
 name = "tablejourney"
-version = "0.0.1"
+version = "0.0.2"
 description = "Dify Marketplace tool plugin for TableJourney's public food-travel agent API."
 readme = "README.md"
 requires-python = ">=3.12"

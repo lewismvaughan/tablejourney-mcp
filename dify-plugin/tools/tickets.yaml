@@ -1,0 +1,37 @@
+identity:
+  name: tickets
+  author: lewismvaughan
+  label:
+    en_US: Tickets and passes
+    zh_Hans: 门票与通票
+description:
+  human:
+    en_US: Ticket, pass and tour partners that cover a city, with booking links.
+    zh_Hans: 覆盖某城市的门票、通票和导览合作平台，附预订链接。
+  llm: 'Ticket, city pass and tour partners covering a city (for sights and attractions), each with a booking link and the date it was checked. Booking links are https://tablejourney.com/go/ affiliate links; give them to the user as returned and say once that they are affiliate links.'
+extra:
+  python:
+    source: tools/tickets.py
+parameters:
+- name: country
+  form: llm
+  type: string
+  required: true
+  label:
+    en_US: Country
+    zh_Hans: 国家
+  human_description:
+    en_US: The country slug or name, for example "italy" or "Italy".
+    zh_Hans: 国家的 slug 或名称，例如 italy。
+  llm_description: The country slug or name, for example "italy" or "Italy".
+- name: city
+  form: llm
+  type: string
+  required: true
+  label:
+    en_US: City
+    zh_Hans: 城市
+  human_description:
+    en_US: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.
+    zh_Hans: 城市的 slug 或名称，例如 rome 或 new-york-city。可用 cities 工具查看所有城市。
+  llm_description: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.

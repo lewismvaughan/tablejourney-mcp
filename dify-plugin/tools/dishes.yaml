@@ -1,0 +1,62 @@
+identity:
+  name: dishes
+  author: lewismvaughan
+  label:
+    en_US: Signature dishes
+    zh_Hans: 特色菜
+description:
+  human:
+    en_US: A city's signature dishes and the verified places that serve them.
+    zh_Hans: 某城市的特色菜，以及供应这些菜的已核实场所。
+  llm: 'Answers "what should I eat here?": a city''s signature dishes, each with a one-line description, the verified venues that serve it and a page URL.'
+extra:
+  python:
+    source: tools/dishes.py
+parameters:
+- name: country
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: Country
+    zh_Hans: 国家
+  human_description:
+    en_US: The country slug or name, for example "italy" or "Italy".
+    zh_Hans: 国家的 slug 或名称，例如 italy。
+  llm_description: The country slug or name, for example "italy" or "Italy".
+- name: city
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: City
+    zh_Hans: 城市
+  human_description:
+    en_US: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.
+    zh_Hans: 城市的 slug 或名称，例如 rome 或 new-york-city。可用 cities 工具查看所有城市。
+  llm_description: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.
+- name: q
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: Query
+    zh_Hans: 查询词
+  human_description:
+    en_US: Optional dish name or ingredient to match, for example "carbonara".
+    zh_Hans: 可选，要匹配的菜名或食材，例如 carbonara。
+  llm_description: Optional dish name or ingredient to match, for example "carbonara".
+- name: limit
+  form: llm
+  type: number
+  required: false
+  default: 20
+  min: 1
+  max: 100
+  label:
+    en_US: Limit
+    zh_Hans: 返回数量上限
+  human_description:
+    en_US: Maximum number of dishes to return. At most 20 are returned without a full-access key.
+    zh_Hans: 返回菜品数量上限。无完整访问 Key 时最多返回 20 条。
+  llm_description: Maximum number of dishes to return. At most 20 are returned without a full-access key.

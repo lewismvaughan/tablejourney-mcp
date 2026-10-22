@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.0.2
 type: plugin
 author: lewismvaughan
 name: tablejourney
@@ -6,8 +6,8 @@ label:
   en_US: TableJourney
   zh_Hans: TableJourney 美食旅行
 description:
-  en_US: Search verified restaurants, cafes and street food, plan a food day, find festivals and bookable food experiences across 200+ cities. Public read-only API, no API key required.
-  zh_Hans: 在 200 多个城市中搜索经过核实的餐厅、咖啡馆和街头小吃，规划一天的美食行程，查找美食节和可预订的美食体验。公开只读接口，无需 API Key。
+  en_US: Search verified restaurants, cafes and street food, plan a food day, find food festivals, signature dishes, food tours, stays and car hire across 224 cities. Public read-only API, no API key required.
+  zh_Hans: 在 224 个城市中搜索经过核实的餐厅、咖啡馆和街头小吃，规划一天的美食行程，查找美食节、特色菜、美食之旅、住宿和租车。公开只读接口，无需 API Key。
 created_at: "2026-09-28T00:00:00Z"
 icon: icon.png
 repo: https://github.com/lewismvaughan/tablejourney-mcp

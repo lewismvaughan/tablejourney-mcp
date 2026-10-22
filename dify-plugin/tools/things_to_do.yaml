@@ -1,0 +1,59 @@
+identity:
+  name: things_to_do
+  author: lewismvaughan
+  label:
+    en_US: Things to do in a city
+    zh_Hans: 城市玩乐一览
+description:
+  human:
+    en_US: Food tours, tickets, food festivals, places to eat, stays and car hire for one city in a single answer, optionally for trip dates.
+    zh_Hans: 一次返回某个城市的美食之旅、门票、美食节、餐饮场所、住宿和租车信息，可指定行程日期。
+  llm: 'Start here for "what can I do in <city>?" or trip planning. Returns bookable experiences, tickets and passes, food festivals in the date window, verified places to eat, stays and car hire for one city, each with a page URL to cite. Booking links are https://tablejourney.com/go/ affiliate links; give them to the user as returned and say once that they are affiliate links.'
+extra:
+  python:
+    source: tools/things_to_do.py
+parameters:
+- name: country
+  form: llm
+  type: string
+  required: true
+  label:
+    en_US: Country
+    zh_Hans: 国家
+  human_description:
+    en_US: The country slug or name, for example "italy" or "Italy".
+    zh_Hans: 国家的 slug 或名称，例如 italy。
+  llm_description: The country slug or name, for example "italy" or "Italy".
+- name: city
+  form: llm
+  type: string
+  required: true
+  label:
+    en_US: City
+    zh_Hans: 城市
+  human_description:
+    en_US: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.
+    zh_Hans: 城市的 slug 或名称，例如 rome 或 new-york-city。可用 cities 工具查看所有城市。
+  llm_description: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.
+- name: from
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: Trip start
+    zh_Hans: 行程开始日期
+  human_description:
+    en_US: Optional trip start date, YYYY-MM-DD. Defaults to today.
+    zh_Hans: 可选，行程开始日期，格式 YYYY-MM-DD，默认今天。
+  llm_description: Optional trip start date, YYYY-MM-DD. Defaults to today.
+- name: to
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: Trip end
+    zh_Hans: 行程结束日期
+  human_description:
+    en_US: Optional trip end date, YYYY-MM-DD. Defaults to about two months after the start.
+    zh_Hans: 可选，行程结束日期，格式 YYYY-MM-DD，默认开始后约两个月。
+  llm_description: Optional trip end date, YYYY-MM-DD. Defaults to about two months after the start.

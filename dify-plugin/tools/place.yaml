@@ -1,0 +1,26 @@
+identity:
+  name: place
+  author: lewismvaughan
+  label:
+    en_US: Place details
+    zh_Hans: 场所详情
+description:
+  human:
+    en_US: One verified place by the id that search_places returned, with whether it is open now and three places nearby.
+    zh_Hans: 根据 search_places 返回的 id 获取单个已核实场所，包括当前是否营业及附近三个场所。
+  llm: One verified place in full by its id from search_places (for example "italy/rome/bakeries/insieme-al-pane"). Adds open_now_utc and three nearby venues with distances.
+extra:
+  python:
+    source: tools/place.py
+parameters:
+- name: id
+  form: llm
+  type: string
+  required: true
+  label:
+    en_US: Place id
+    zh_Hans: 场所 ID
+  human_description:
+    en_US: 'The place id as returned by search_places: country/city/kind/slug.'
+    zh_Hans: search_places 返回的场所 ID，格式为 country/city/kind/slug。
+  llm_description: 'The place id as returned by search_places: country/city/kind/slug.'

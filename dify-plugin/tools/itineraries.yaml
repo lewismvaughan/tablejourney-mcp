@@ -1,0 +1,37 @@
+identity:
+  name: itineraries
+  author: lewismvaughan
+  label:
+    en_US: Food itineraries
+    zh_Hans: 美食行程
+description:
+  human:
+    en_US: Ready-made day-by-day food itineraries for a city, with every venue linked to its page.
+    zh_Hans: 某城市现成的逐日美食行程，每个场所都链接到其页面。
+  llm: Day-by-day food itineraries written for a city (for example a weekend), with every venue resolved to its page. Use for "plan my weekend" style questions; plan_day composes a single day from filters instead.
+extra:
+  python:
+    source: tools/itineraries.py
+parameters:
+- name: country
+  form: llm
+  type: string
+  required: true
+  label:
+    en_US: Country
+    zh_Hans: 国家
+  human_description:
+    en_US: The country slug or name, for example "italy" or "Italy".
+    zh_Hans: 国家的 slug 或名称，例如 italy。
+  llm_description: The country slug or name, for example "italy" or "Italy".
+- name: city
+  form: llm
+  type: string
+  required: true
+  label:
+    en_US: City
+    zh_Hans: 城市
+  human_description:
+    en_US: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.
+    zh_Hans: 城市的 slug 或名称，例如 rome 或 new-york-city。可用 cities 工具查看所有城市。
+  llm_description: The city slug or name, for example "rome" or "new-york-city". The cities tool lists every covered city.

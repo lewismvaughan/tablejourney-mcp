@@ -5,8 +5,8 @@ identity:
     en_US: TableJourney
     zh_Hans: TableJourney 美食旅行
   description:
-    en_US: Verified food places, festivals, tours and stays in 200+ cities, with provenance on every entity. Public read-only API at tablejourney.com, no authentication required.
-    zh_Hans: 覆盖 200 多个城市、每条数据都有可核实来源的美食场所、美食节、行程与住宿信息。来自 tablejourney.com 的公开只读接口，无需身份验证。
+    en_US: Verified food places, festivals, signature dishes, itineraries, tours, tickets, stays and car hire in 224 cities, with the source of every listing on its page. Public read-only API at tablejourney.com; no key required.
+    zh_Hans: 覆盖 224 个城市的已核实美食场所、美食节、特色菜、行程、导览、门票、住宿和租车信息，每条数据的来源都写在其页面上。来自 tablejourney.com 的公开只读接口，无需 Key。
   icon: icon.png
   tags:
     - travel
@@ -16,15 +16,15 @@ credentials_for_provider:
     type: secret-input
     required: false
     label:
-      en_US: API key (optional)
-      zh_Hans: API Key（可选）
+      en_US: Partner API key (optional)
+      zh_Hans: 合作伙伴 API Key（可选）
     placeholder:
-      en_US: Leave blank unless you have a TableJourney agent API key
-      zh_Hans: 除非你有 TableJourney 代理接口的 API Key，否则留空
+      en_US: Leave blank to use the tools without a key
+      zh_Hans: 留空即可在无 Key 的情况下使用
     help:
-      en_US: TableJourney's API is public and works with no key. An optional key only tags your requests for attribution in TableJourney's own usage reporting; it unlocks no extra data and is never required.
-      zh_Hans: TableJourney 接口是公开的，无需 Key 即可使用。可选的 Key 仅用于在 TableJourney 自己的用量统计中标记请求来源，不会解锁额外数据，也不是必需项。
-    url: https://tablejourney.com/agents/
+      en_US: Optional. A TableJourney partner API key. When it is set, the booking links the tools return carry your partner code. It does not change the data the tools return, and every tool works without it.
+      zh_Hans: 可选。TableJourney 合作伙伴 API Key。设置后，工具返回的预订链接会带上你的合作伙伴代码。它不会改变工具返回的数据，不填写时所有工具同样可用。
+    url: https://tablejourney.com/agents/earn/
 extra:
   python:
     source: provider/tablejourney.py
@@ -34,3 +34,10 @@ tools:
   - tools/festivals.yaml
   - tools/experiences.yaml
   - tools/cities.yaml
+  - tools/things_to_do.yaml
+  - tools/dishes.yaml
+  - tools/itineraries.yaml
+  - tools/place.yaml
+  - tools/stays.yaml
+  - tools/tickets.yaml
+  - tools/car_hire.yaml

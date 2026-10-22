@@ -13,11 +13,14 @@ extra:
   python:
     source: tools/cities.py
 parameters:
-  - name: country
-    form: llm
-    type: string
-    required: false
-    label:
-      en_US: Country
-      zh_Hans: 国家
-    llm_description: Restrict the list to one country, using its slug or name, for example "japan" or "Japan".
+- name: country
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: Country
+    zh_Hans: 国家
+  llm_description: Restrict the list to one country, using its slug or name, for example "japan" or "Japan".
+  human_description:
+    en_US: Restrict the list to one country, using its slug or name, for example "japan" or "Japan".
+    zh_Hans: 国家

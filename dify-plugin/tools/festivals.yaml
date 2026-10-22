@@ -13,54 +13,72 @@ extra:
   python:
     source: tools/festivals.py
 parameters:
-  - name: country
-    form: llm
-    type: string
-    required: false
-    label:
-      en_US: Country
-      zh_Hans: 国家
-    llm_description: The country slug, for example "japan" or "italy".
-  - name: city
-    form: llm
-    type: string
-    required: false
-    label:
-      en_US: City
-      zh_Hans: 城市
-    llm_description: The city slug, for example "kyoto" or "rome".
-  - name: q
-    form: llm
-    type: string
-    required: false
-    label:
-      en_US: Query
-      zh_Hans: 查询词
-    llm_description: Free text to match against the festival name or description.
-  - name: from
-    form: llm
-    type: string
-    required: false
-    label:
-      en_US: From date
-      zh_Hans: 起始日期
-    llm_description: Only return festivals on or after this ISO date (YYYY-MM-DD).
-  - name: to
-    form: llm
-    type: string
-    required: false
-    label:
-      en_US: To date
-      zh_Hans: 结束日期
-    llm_description: Only return festivals on or before this ISO date (YYYY-MM-DD).
-  - name: limit
-    form: llm
-    type: number
-    required: false
-    default: 20
-    min: 1
-    max: 100
-    label:
-      en_US: Limit
-      zh_Hans: 返回数量上限
-    llm_description: Maximum number of festivals to return, from 1 to 100.
+- name: country
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: Country
+    zh_Hans: 国家
+  llm_description: The country slug or name, for example "japan" or "Italy".
+  human_description:
+    en_US: The country slug or name, for example "japan" or "Italy".
+    zh_Hans: 国家
+- name: city
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: City
+    zh_Hans: 城市
+  llm_description: The city slug or name, for example "kyoto" or "Rome".
+  human_description:
+    en_US: The city slug or name, for example "kyoto" or "Rome".
+    zh_Hans: 城市
+- name: q
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: Query
+    zh_Hans: 查询词
+  llm_description: Free text to match against the festival name or description.
+  human_description:
+    en_US: Free text to match against the festival name or description.
+    zh_Hans: 查询词
+- name: from
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: From date
+    zh_Hans: 起始日期
+  llm_description: Only return festivals on or after this ISO date (YYYY-MM-DD).
+  human_description:
+    en_US: Only return festivals on or after this ISO date (YYYY-MM-DD).
+    zh_Hans: 起始日期
+- name: to
+  form: llm
+  type: string
+  required: false
+  label:
+    en_US: To date
+    zh_Hans: 结束日期
+  llm_description: Only return festivals on or before this ISO date (YYYY-MM-DD).
+  human_description:
+    en_US: Only return festivals on or before this ISO date (YYYY-MM-DD).
+    zh_Hans: 结束日期
+- name: limit
+  form: llm
+  type: number
+  required: false
+  default: 20
+  min: 1
+  max: 100
+  label:
+    en_US: Limit
+    zh_Hans: 返回数量上限
+  llm_description: Maximum number of festivals to return, from 1 to 100.
+  human_description:
+    en_US: Maximum number of festivals to return, from 1 to 100.
+    zh_Hans: 返回数量上限

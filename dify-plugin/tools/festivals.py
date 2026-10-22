@@ -10,9 +10,7 @@ from ._client import get_json
 
 
 class FestivalsTool(Tool):
-    def _invoke(
-        self, tool_parameters: dict[str, Any]
-    ) -> Generator[ToolInvokeMessage, None, None]:
+    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         params = {
             "country": tool_parameters.get("country"),
             "city": tool_parameters.get("city"),

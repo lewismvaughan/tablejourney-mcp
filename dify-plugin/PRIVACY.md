@@ -7,16 +7,21 @@ account or API key.
 ## What is collected and sent
 
 When a tool from this plugin is invoked, the plugin sends only the
-parameters that tool call carries, as HTTPS GET query parameters (or, for
-`plan_day`, as part of the request path) to `tablejourney.com`. Depending
-on the tool, that is a mix of:
+parameters that tool call carries, as HTTPS GET query parameters or as
+part of the request path, to `tablejourney.com`. Depending on the tool,
+that is a mix of:
 
 * A free-text search query, city, country, cuisine, dietary need, price
-  tier, coordinates, date, date range, or partner name that you or the
+  tier, place id, date, date range, or partner name that you or the
   calling LLM supplied as tool input.
-* The optional API key, if you configured one in the provider credentials,
-  sent as an `X-API-Key` header. This key exists only for TableJourney's
-  own attribution reporting; it is never required.
+* For `search_places` only, an optional `near` point (latitude and
+  longitude) and radius, if the caller supplies one to search around a
+  location. The plugin never reads a device location itself; it sends
+  only a point given as tool input.
+* The optional partner API key, if you configured one in the provider
+  credentials, sent as an `X-API-Key` header. Its only effect is that the
+  booking links in each answer carry the key holder's partner code; it is
+  never required.
 
 This plugin does not send your Dify prompts, chat history, account
 identifiers, IP address, or any data beyond the specific tool parameters
@@ -36,6 +41,10 @@ privacy policy, not by this plugin.
 
 ## Where it goes
 
+Booking links in answers point to `tablejourney.com/go/`, which forwards
+to the booking partner when a person opens one; the plugin itself never
+opens them.
+
 The only third party this plugin talks to is TableJourney
 (`tablejourney.com`), operated by Rowie LLC. TableJourney's site privacy
 policy is at [tablejourney.com/privacy/](https://tablejourney.com/privacy/).
@@ -50,8 +59,10 @@ load on the site and is covered by the same logging practice.
 * The optional `api_key` credential is declared as a Dify `secret-input`.
   Dify encrypts it at rest and never echoes it back to clients.
 * This plugin's error messages never include the credential value.
-* TableJourney's API works identically with or without this key; no
-  private or personal data is unlocked by supplying one.
+* TableJourney's API returns the same data with or without a partner
+  key; no private or personal data is unlocked by supplying one. When a
+  key is saved, the plugin makes one request with it to confirm
+  TableJourney accepts it.
 
 ## Contact
 

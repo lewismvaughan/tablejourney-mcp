@@ -10,9 +10,7 @@ from ._client import get_json
 
 
 class SearchPlacesTool(Tool):
-    def _invoke(
-        self, tool_parameters: dict[str, Any]
-    ) -> Generator[ToolInvokeMessage, None, None]:
+    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         params = {
             "q": tool_parameters.get("q"),
             "country": tool_parameters.get("country"),
@@ -36,9 +34,7 @@ class SearchPlacesTool(Tool):
                 api_key=self.runtime.credentials.get("api_key"),
             )
         except Exception as exc:
-            yield self.create_text_message(
-                f"TableJourney place search failed: {exc}"
-            )
+            yield self.create_text_message(f"TableJourney place search failed: {exc}")
             return
 
         yield self.create_json_message({"results": results, "count": len(results)})

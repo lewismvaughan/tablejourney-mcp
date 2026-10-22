@@ -6,18 +6,16 @@ from typing import Any
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from ._client import get_json
+from ._client import get_json, slug
 
 
 class PlanDayTool(Tool):
-    def _invoke(
-        self, tool_parameters: dict[str, Any]
-    ) -> Generator[ToolInvokeMessage, None, None]:
+    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         country = (tool_parameters.get("country") or "").strip()
         city = (tool_parameters.get("city") or "").strip()
         if not country or not city:
             yield self.create_text_message(
-                "Both country and city are required, as TableJourney's own URL slugs, "
+                "Both country and city are required, as slugs or names, "
                 "for example country=japan and city=tokyo."
             )
             return
@@ -31,7 +29,7 @@ class PlanDayTool(Tool):
 
         try:
             plan = get_json(
-                f"/plan/{country}/{city}",
+                f"/plan/{slug(country)}/{slug(city)}",
                 params=params,
                 api_key=self.runtime.credentials.get("api_key"),
             )
