@@ -95,3 +95,10 @@ Documentation and the registry manifests only. The servers run on the sites; the
 - [`tablejourney.openapi.json`](tablejourney.openapi.json) and [`corkandcurve.openapi.json`](corkandcurve.openapi.json): the REST OpenAPI documents.
 - [`tablejourney.server.json`](tablejourney.server.json) and [`corkandcurve.server.json`](corkandcurve.server.json): the MCP registry manifests.
 - [`logo.png`](logo.png): 400 x 400 logo for directory listings.
+
+## Framework packages
+
+- **Vercel AI SDK:** [`tablejourney-ai-sdk`](https://www.npmjs.com/package/tablejourney-ai-sdk) (source in [`ai-sdk/`](ai-sdk/))
+- **LangChain:** `langchain-tablejourney` on PyPI (source in [`langchain/`](langchain/))
+
+Both call the public MCP server at `https://tablejourney.com/mcp`; no key is needed.
