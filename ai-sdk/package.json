@@ -1,0 +1,27 @@
+{
+  "name": "tablejourney-ai-sdk",
+  "version": "0.1.0",
+  "description": "TableJourney food travel tools for the Vercel AI SDK: verified places to eat, food festivals with dates, food tours, cooking classes and stays in 224 cities.",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "files": ["index.js", "index.d.ts", "README.md", "LICENSE"],
+  "peerDependencies": {
+    "ai": ">=5",
+    "zod": ">=3.25"
+  },
+  "keywords": ["ai-sdk", "vercel-ai-sdk", "ai", "tools", "agents", "travel", "food", "restaurants", "festivals", "mcp"],
+  "homepage": "https://tablejourney.com/agents/#ai-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lewismvaughan/tablejourney-mcp.git"
+  },
+  "author": "TableJourney (https://tablejourney.com)",
+  "license": "MIT"
+}
