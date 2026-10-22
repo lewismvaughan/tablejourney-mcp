@@ -62,12 +62,13 @@ TableJourney only. Free to join; terms at https://tablejourney.com/partners/term
 
 | Tool | What it does |
 |---|---|
-| `partner_join` | Start an account with an email address (a person or company behind the agent receives payouts); a six-digit code is emailed |
-| `partner_confirm` | Confirm with the code; returns an API key and a referral code |
+| `partner_join` | Start an account. No email needed: the answer holds an API key and a referral code at once (a person or company behind the agent receives payouts). With an email, a code is emailed instead |
+| `partner_add_email` | Add an email before the first payout; confirm it with `partner_confirm` (the key stays the same) |
+| `partner_confirm` | Confirm an email with its code; returns the API key for an account that joined with an email |
 | `partner_signin_code` / `partner_signin` | Get a new key later by emailed code |
 | `partner_link` | Any tablejourney.com page as a link carrying your code |
 | `partner_stats` | Visits, booking clicks, pending, confirmed and paid earnings |
-| `partner_payout_method` / `partner_confirm_payout` | Set PayPal, USDC on Base or bank details (confirmed by emailed code) |
+| `partner_payout_method` / `partner_confirm_payout` | Set PayPal, crypto (USDC on Base or Solana, ETH, SOL, BTC) or bank details (confirmed by emailed code) |
 
 How attribution works: send the key as `Authorization: Bearer <key>` (or `X-API-Key`) and every booking link the read tools return carries your code; or add `?ref=<code>` to any https://tablejourney.com link and the visit is yours for 30 days. Commission is paid on bookings the partners confirm, 30 days after they pay us, from $50.
 
